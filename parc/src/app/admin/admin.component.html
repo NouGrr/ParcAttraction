@@ -32,37 +32,9 @@
             <input matInput formControlName="difficulte" type="number" min="1" max="5">
           </mat-form-field>
 
-          <mat-checkbox formControlName="visible">Visible</mat-checkbox>
-
-          <button mat-button (click)="deleteAttraction(indexForm)">Supprimer</button>
-        </div>
-
-        <!-- Formulaire pour ajouter une critique -->
-        <div class="critique-form">
-          <h3>Ajouter une critique</h3>
-          <form [formGroup]="formulaireCritique" (ngSubmit)="addCritique(indexForm)">
-            <mat-form-field class="champ" appearance="fill">
-              <mat-label>Texte</mat-label>
-              <textarea matInput formControlName="texte"></textarea>
-            </mat-form-field>
-
-            <mat-form-field class="champ" appearance="fill">
-              <mat-label>Note</mat-label>
-              <input matInput formControlName="note" type="number" min="1" max="5">
-            </mat-form-field>
-
-            <mat-form-field class="champ" appearance="fill">
-              <mat-label>Nom</mat-label>
-              <input matInput formControlName="nom">
-            </mat-form-field>
-
-            <mat-form-field class="champ" appearance="fill">
-              <mat-label>Prénom</mat-label>
-              <input matInput formControlName="prenom">
-            </mat-form-field>
-
-            <button mat-button type="submit">Ajouter une critique</button>
-          </form>
+          <mat-slide-toggle class="champ" formControlName="visible">Element visible</mat-slide-toggle>
+  
+          <button mat-button (click)="onSubmit(formulaireAttraction)" class="champ">Enregistrer</button>
         </div>
       </ng-container>
     </ng-container>

@@ -15,7 +15,7 @@ export class CritiqueService {
   }
 
   public postCritique(critique: CritiqueInterface): Observable<CritiqueInterface> {
-    const url = `http://127.0.0.1:5000/attraction/${critique.attractionId}/critiques`;
+    const url = `http://127.0.0.1:5000/attraction/${critique.attraction_id}/critiques`;
     return this.dataService.postData(url, critique) as Observable<CritiqueInterface>;
   }
 }

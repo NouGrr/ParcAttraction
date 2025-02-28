@@ -8,6 +8,9 @@ import { MessageInterface } from '../Interface/message.interface';
   providedIn: 'root',
 })
 export class AttractionService {
+  deleteAttraction(attractionId: any) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private dataService: DataService) {
 

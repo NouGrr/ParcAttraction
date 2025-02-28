@@ -25,7 +25,7 @@ def add_attraction(data):
     return id
 
 def get_all_attraction():
-    json = req.select_from_db("SELECT * FROM attraction")
+    json = req.select_from_db("SELECT * FROM attraction, critique where attraction.attraction_id == critique.id_attraction")
     
     return json
 

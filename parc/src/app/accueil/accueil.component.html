@@ -10,15 +10,42 @@
         <span>Difficulté de l'attraction / 5</span>
       </div>
     </div>
-    <ng-container *ngFor="let attraction of attractions | async;">
+
+    <!-- Affichage des attractions -->
+    <ng-container *ngFor="let attraction of attractions | async">
       <div class="attraction">
-        <span>{{attraction.nom}}</span>
-        <span>{{attraction.description}}</span>
-        <span>{{attraction.difficulte}} / 5</span>
-        <button mat-button (click)="toggleVisibility(attraction)">
-          {{ attraction.visible ? 'Masquer' : 'Afficher' }}
-        </button>
+        <span>{{ attraction.nom }}</span>
+        <span>{{ attraction.description }}</span>
+        <span>{{ attraction.difficulte }} / 5</span>
       </div>
+
+      <!-- Formulaire de critique sous chaque attraction -->
+      <form #form="ngForm" (ngSubmit)="addCritique(attraction.attraction_id, form)">
+        <mat-form-field appearance="fill">
+          <mat-label>Commentaire</mat-label>
+          <textarea matInput name="commentaire" [(ngModel)]="nouvelleCritique.commentaire" required></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Note</mat-label>
+          <input matInput type="number" name="note" [(ngModel)]="nouvelleCritique.note" min="1" max="5" required>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Envoyer</button>
+      </form>
+
+      <!-- Affichage des critiques pour chaque attraction -->
+      <ng-container *ngIf="(critiques[attraction!.attraction_id!] | async) as avis">
+        <!-- <div *ngIf="(critiques[attraction.attraction_id] | async) as avis"> -->
+          <h3>Avis :</h3>
+          <div *ngFor="let critique of avis">
+            <div class="avis">
+              <span>{{ critique.commentaire }}</span>
+              <span>Note: {{ critique.note }} / 5</span>
+            </div>
+          </div>
+        <!-- </div> Assurez-vous que cette balise de fermeture est correctement placée -->
+      </ng-container>
     </ng-container>
   </mat-card-content>
 </mat-card>

@@ -10,6 +10,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
+import { CritiqueInterface } from '../Interface/critique.interface';
 
 @Component({
   selector: 'app-admin',
@@ -59,27 +60,5 @@ export class AdminComponent {
         visible: new FormControl(true)
       })
     );
-  }
-
-  deleteAttraction(index: number) {
-    const attractionId = this.formulaireAttractions.at(index).value.id;
-    this.attractionService.deleteAttraction(attractionId).subscribe(() => {
-      this.formulaireAttractions.removeAt(index);
-    });
-  }
-
-  addCritique(attractionIndex: number) {
-    const attractionId = this.formulaireAttractions.at(attractionIndex).value.id;
-    const critique: CritiqueInterface = {
-      id: 0,
-      attractionId: attractionId,
-      texte: this.formulaireCritique.value.texte,
-      note: this.formulaireCritique.value.note,
-      nom: this.formulaireCritique.value.nom,
-      prenom: this.formulaireCritique.value.prenom
-    };
-    this.critiqueService.postCritique(critique).subscribe(() => {
-      this.formulaireCritique.reset();
-    });
   }
 }
